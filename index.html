@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandon Frederick — Mechanical Engineer & AI Builder</title>
+  <meta name="description" content="Caltech ME '25. BattleBots Team Riptide. HRL Laboratories. Building autonomous AI systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a24;
+      --border: #2a2a38;
+      --text: #e8e8f0;
+      --muted: #8888a8;
+      --accent: #6366f1;
+      --accent2: #818cf8;
+      --green: #34d399;
+      --orange: #fb923c;
+      --red: #f87171;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-name { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--muted); font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; }
+    h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 2rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; }
+
+    /* HERO */
+    #hero {
+      padding-top: 9rem;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-headline { margin-bottom: 1.5rem; }
+    .hero-headline .accent { color: var(--accent2); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-creds {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .cred {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .cred .icon { font-size: 1rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent2); text-decoration: none; color: #fff; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); text-decoration: none; }
+
+    /* FEATURED (BATTLEBOTS) */
+    #featured {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 100%;
+      padding: 4rem 2rem;
+    }
+    .featured-inner { max-width: 860px; margin: 0 auto; }
+    .featured-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+    .featured-card:hover { border-color: var(--accent); }
+    .featured-eyebrow {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+    .featured-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .featured-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .featured-badge {
+      background: rgba(251,146,60,0.1);
+      border: 1px solid rgba(251,146,60,0.3);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      min-width: 140px;
+    }
+    .badge-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .badge-label { font-size: 0.8rem; color: var(--orange); font-weight: 500; }
+
+    /* WORK */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      padding-top: 0.2rem;
+    }
+    .timeline-role { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .timeline-company {
+      font-size: 0.875rem;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    .timeline-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-group {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .skill-group-title {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .edu-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .edu-school { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .edu-degree { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .edu-date { font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--accent2); }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      max-width: 100%;
+      padding: 5rem 2rem;
+    }
+    .contact-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+    .contact-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+    .contact-sub { color: var(--muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .featured-card { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Brandon Frederick</span>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Available for technical documentation & engineering work</div>
+  <h1 class="hero-headline">
+    Mechanical Engineer.<br/>
+    <span class="accent">AI Systems Builder.</span>
+  </h1>
+  <p class="hero-sub">
+    Caltech ME '25. Built hardware at HRL Laboratories inside a quantum cryogenic research environment. 
+    Mechanical lead for Team Riptide on BattleBots (Discovery Channel). 
+    Now building autonomous AI systems and taking on technical documentation and engineering consulting work.
+  </p>
+  <div class="hero-creds">
+    <div class="cred"><span class="icon">🎓</span> Caltech B.S. Mechanical Engineering '25</div>
+    <div class="cred"><span class="icon">🔬</span> HRL Laboratories — Boeing/GM Research Lab</div>
+    <div class="cred"><span class="icon">⚔️</span> BattleBots Team Riptide — Discovery Channel</div>
+    <div class="cred"><span class="icon">🔐</span> DOD Clearance</div>
+    <div class="cred"><span class="icon">📍</span> Calabasas, CA — Remote Available</div>
+  </div>
+  <div class="hero-actions">
+    <a href="#contact" class="btn btn-primary">Work with me</a>
+    <a href="https://github.com/bfrederick18" class="btn btn-outline" target="_blank">GitHub ↗</a>
+  </div>
+</section>
+
+<!-- FEATURED: BATTLEBOTS -->
+<div id="featured">
+  <div class="featured-inner">
+    <p class="section-label">Featured</p>
+    <div class="featured-card">
+      <div>
+        <p class="featured-eyebrow">⚡ Discovery Channel · BattleBots</p>
+        <h3 class="featured-title">Team Riptide — Head Mechanical Lead</h3>
+        <p class="featured-desc">
+          Designed, assembled, and maintained a combat robot across multiple filmed seasons in Las Vegas. 
+          Coordinated with the team through a full design-prototype-compete cycle. 
+          Won the 2021 Rookie of the Year Award. One of the most successful robots in recent BattleBots history.
+        </p>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-num">12/15</div><div class="stat-label">Match Record</div></div>
+          <div class="stat"><div class="stat-num">11</div><div class="stat-label">KOs</div></div>
+          <div class="stat"><div class="stat-num">Top 8</div><div class="stat-label">2021 & 2022</div></div>
+        </div>
+      </div>
+      <div class="featured-badge">
+        <div class="badge-icon">🏆</div>
+        <div class="badge-label">2021 Rookie of the Year</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Experience</p>
+  <h2>Work History</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sep 2025 – Present</div>
+      <div>
+        <div class="timeline-role">Engineer I</div>
+        <div class="timeline-company">HRL Laboratories, LLC — Malibu, CA</div>
+        <div class="timeline-desc">
+          Thermal engineering and simulations inside a quantum cryogenic research environment 
+          (dilution refrigerators, dewars, Janis cryostats). Assembly design for precision hardware. 
+          Self-initiated topology optimization projects in SolidWorks — designed a ceiling winch bracket 
+          for safely lowering cryogenic probes before being asked. Boeing/GM joint research laboratory.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Thermal Desktop</span>
+          <span class="tag">SolidWorks</span>
+          <span class="tag">Topology Optimization</span>
+          <span class="tag">Cryogenics</span>
+          <span class="tag">ANSYS</span>
+          <span class="tag">DOD Cleared</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jun 2024 – Sep 2024</div>
+      <div>
+        <div class="timeline-role">Undergrad Research Intern</div>
+        <div class="timeline-company">HRL Laboratories, LLC — Malibu, CA</div>
+        <div class="timeline-desc">
+          Stellar performance led to full-time offer post-graduation. Gained hands-on experience 
+          with advanced manufacturing, simulation, and hardware development inside a 
+          classified research environment.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">Simulation</span>
+          <span class="tag">Hardware Development</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jun 2022 – Sep 2022</div>
+      <div>
+        <div class="timeline-role">Mechanical Engineering Intern</div>
+        <div class="timeline-company">Field AI — Culver City, CA</div>
+        <div class="timeline-desc">
+          Founding team member. Contributed to deployment of a payload system for the 
+          Boston Dynamics Spot robot. Built custom mechanical designs with SolidWorks on a rapid 
+          iteration cycle. Served as the bridge between hardware and software teams — rare role 
+          for a mechanical engineer.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Boston Dynamics Spot</span>
+          <span class="tag">SolidWorks</span>
+          <span class="tag">Rapid Prototyping</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">Founding Team</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jun 2023 – Sep 2023</div>
+      <div>
+        <div class="timeline-role">Test Software Engineering Intern</div>
+        <div class="timeline-company">Moog Aircraft — Torrance, CA</div>
+        <div class="timeline-desc">
+          Test software and systems engineering for aircraft hardware. 
+          Applied mechanical and software skills in a precision aerospace manufacturing context.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Aerospace</span>
+          <span class="tag">Test Engineering</span>
+          <span class="tag">Software</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jul 2020 – Aug 2020</div>
+      <div>
+        <div class="timeline-role">NASA SEES Summer Intern</div>
+        <div class="timeline-company">NASA Texas Space Grant Consortium — Virtual</div>
+        <div class="timeline-desc">
+          Assisted NASA scientists in research across a three-week program hosted by UT Austin. 
+          Designed C# simulations modeling pandemic response strategy in a lunar base environment. 
+          Earned multiple NASA certificates in space exploration, climate science, and coding.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">C#</span>
+          <span class="tag">Simulation</span>
+          <span class="tag">NASA</span>
+          <span class="tag">Space Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">May 2023 – Dec 2025</div>
+      <div>
+        <div class="timeline-role">Engineering Consultant</div>
+        <div class="timeline-company">Tek Enterprises, Inc. — Van Nuys, CA</div>
+        <div class="timeline-desc">
+          Long-running consulting engagement alongside academic and professional work. 
+          Applied manufacturing and mechanical engineering expertise in an industry context.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Manufacturing</span>
+          <span class="tag">Consulting</span>
+          <span class="tag">SolidWorks</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+
+    <div class="skill-group">
+      <div class="skill-group-title">CAD & Design</div>
+      <div class="skill-list">
+        <span class="skill-pill">SolidWorks</span>
+        <span class="skill-pill">Fusion 360</span>
+        <span class="skill-pill">Onshape</span>
+        <span class="skill-pill">Topology Optimization</span>
+        <span class="skill-pill">3D Printing</span>
+        <span class="skill-pill">GD&T</span>
+        <span class="skill-pill">SOLIDWORKS PDM</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Simulation & Analysis</div>
+      <div class="skill-list">
+        <span class="skill-pill">ANSYS Mechanical</span>
+        <span class="skill-pill">Thermal Desktop</span>
+        <span class="skill-pill">FEA</span>
+        <span class="skill-pill">Thermal Analysis</span>
+        <span class="skill-pill">NI VeriStand</span>
+        <span class="skill-pill">COMSOL</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Programming</div>
+      <div class="skill-list">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">C#</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">C / C++</span>
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">React.js</span>
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">LaTeX</span>
+        <span class="skill-pill">Bash</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">AI & Automation</div>
+      <div class="skill-list">
+        <span class="skill-pill">LLM Integration</span>
+        <span class="skill-pill">Autonomous Agents</span>
+        <span class="skill-pill">Python Automation</span>
+        <span class="skill-pill">AI Systems Design</span>
+        <span class="skill-pill">Whisper (STT)</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Certifications</div>
+      <div class="skill-list">
+        <span class="skill-pill">SOLIDWORKS CSWA-MD</span>
+        <span class="skill-pill">NASA Space Exploration</span>
+        <span class="skill-pill">HackerRank Python</span>
+        <span class="skill-pill">HackerRank C#</span>
+        <span class="skill-pill">edX Python Essentials</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Domains</div>
+      <div class="skill-list">
+        <span class="skill-pill">Aerospace & Defense</span>
+        <span class="skill-pill">Cryogenics</span>
+        <span class="skill-pill">Quantum Hardware</span>
+        <span class="skill-pill">Combat Robotics</span>
+        <span class="skill-pill">Technical Documentation</span>
+        <span class="skill-pill">Manufacturing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Education</p>
+  <h2>Academic Background</h2>
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+    <div class="edu-card">
+      <div class="edu-icon">🏛️</div>
+      <div>
+        <div class="edu-school">California Institute of Technology (Caltech)</div>
+        <div class="edu-degree">B.S. Mechanical Engineering · Minor in Computer Science · Class of 2025</div>
+        <div class="edu-date">Sep 2021 – Jun 2025</div>
+        <div class="timeline-tags" style="margin-top: 0.75rem;">
+          <span class="tag">URC 2023 Team CRATER</span>
+          <span class="tag">Caltech Robotics Team</span>
+          <span class="tag">Hispanic Scholarship Fund Scholar '21–'23</span>
+          <span class="tag">Indoor Volleyball</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-card" style="opacity: 0.7;">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-school">Viewpoint School</div>
+        <div class="edu-degree">High School Diploma · Class of 2021</div>
+        <div class="edu-date">Sep 2017 – Jun 2021</div>
+        <div class="timeline-tags" style="margin-top: 0.75rem;">
+          <span class="tag">VEX Robotics Captain</span>
+          <span class="tag">FRC Team 2584</span>
+          <span class="tag">Varsity Volleyball (Libero)</span>
+          <span class="tag">2020 VEX Worlds Quarterfinalist</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="contact-title">Let's work together.</h2>
+    <p class="contact-sub">
+      Available for technical documentation, CAD/FEA consulting, and engineering services.<br/>
+      $100–150/hr · Remote · DOD clearance available for sensitive projects.
+    </p>
+    <div class="contact-links">
+      <a href="https://reddit.com/u/bfred_" class="btn btn-primary" target="_blank">Reddit: u/bfred_</a>
+      <a href="https://www.linkedin.com/in/bfrederick18" class="btn btn-outline" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/bfrederick18" class="btn btn-outline" target="_blank">GitHub ↗</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--muted);">
+      Prefer a 15-min scope call first. What are we building?
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>Brandon Frederick · Calabasas, CA · Built Feb 2026</p>
+</footer>
+
+</body>
+</html>
